@@ -1,8 +1,39 @@
-Classe	                      Responsabilità
+SCHEMA
+                     +-------------------------+
+                     |       MainServer        |
+                     |                         |
+                     |    Avvia il server      |
+                     +-------------------------+
+                                  |
+                                  | crea
+                                  v
+             +-----------------------------------------+
+             |               ServerChat                |
+             |                                         |
+             |  Accetta le connessioni                 |
+             |  e gestisce i client collegati          |
+             +-----------------------------------------+
+                                  |
+                                  | crea un Thread
+                                  | per ogni client
+                                  v
+             +-----------------------------------------+
+             |                                         |
+             v                   v                     v
+    +----------------+  +----------------+  +----------------+
+    | ClientHandler 1|  | ClientHandler 2|  | ClientHandler 3|
+    |                |  |                |  |                |
+    |     Thread     |  |     Thread     |  |     Thread     |
+    +----------------+  +----------------+  +----------------+
+             |                   |                     |
+             v                   v                     v
+         Client 1             Client 2              Client 3
 
-MainServer	                  Contiene il main() e avvia il server
-ServerChat	                  Apre il ServerSocket, accetta i client e conserva l'elenco dei client connessi
-ClientHandler extends Thread	Gestisce la comunicazione con un singolo client e inoltra i messaggi al server
+
+CLASSI
+MainServer -> Contiene il main() e avvia il server
+ServerChat -> Apre il ServerSocket, accetta i client e conserva l'elenco dei client connessi
+ClientHandler extends Thread -> Gestisce la comunicazione con un singolo client e inoltra i messaggi al server
 
 
 METODI 
