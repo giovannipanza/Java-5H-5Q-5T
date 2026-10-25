@@ -5,13 +5,13 @@ ServerChat	                  Apre il ServerSocket, accetta i client e conserva l
 ClientHandler extends Thread	Gestisce la comunicazione con un singolo client e inoltra i messaggi al server
 
 
-Metodi
+METODI 
 + startServer(): void — attende le connessioni, crea e avvia i ClientHandler.
 + addClient(ClientHandler c): void — aggiunge un client alla lista.
 + removeClient(ClientHandler c): void — rimuove un client disconnesso.
 + broadcast(String msg): void — invia un messaggio a tutti i client collegati.
 
-Flusso di esecuzione
+FLUSSO DI ESECUZIONE
 1. Avvio del server
    MainServer crea ServerChat e chiama startServer().
 2. Attesa di una connessione 
@@ -24,3 +24,10 @@ Flusso di esecuzione
    ServerChat scorre la lista dei client e richiama sendMessage() su ciascun ClientHandler.
 6. Disconnessione
    Quando readLine() restituisce null o si verifica un errore di comunicazione, il client viene rimosso dalla lista e il socket viene chiuso.
+
+VANTAGGI DI QUESTA SCELTA
+- Incapsulamento: la lista dei client rimane gestita da ServerChat.
+- Separazione delle responsabilità: ClientHandler riceve i messaggi, ServerChat li distribuisce.
+- Collaborazione tra oggetti: un oggetto richiama i metodi di un altro attraverso un riferimento.
+
+Un oggetto non deve necessariamente conoscere tutti gli oggetti con cui deve interagire. È sufficiente che conosca l'oggetto responsabile del servizio di cui ha bisogno.
